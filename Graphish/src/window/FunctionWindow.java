@@ -15,17 +15,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Test extends JFrame {	private static final long serialVersionUID = -982798754720311902L;
+public class FunctionWindow extends JFrame {	private static final long serialVersionUID = -982798754720311902L;
 	
 	private final Dimension INITIAL_D = new Dimension(600,600);
 	private JPanel pnl;
 	private JLabel lbl;
 	private JButton btn;
 	
-    private Test() {
+    private FunctionWindow() {
     	super();
     	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    	setTitle("Test");
+    	setTitle("Function Viewer");
     	
     	Container pane = getContentPane();
     	pane.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -49,9 +49,9 @@ public class Test extends JFrame {	private static final long serialVersionUID = 
     	btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String lastNum = Test.this.lbl.getText();
+				String lastNum = FunctionWindow.this.lbl.getText();
 				int newNum = 1 + Integer.parseInt(lastNum);
-				Test.this.lbl.setText("" + newNum);
+				FunctionWindow.this.lbl.setText("" + newNum);
 			}
 		});
     	pane.add(pnl);
@@ -62,7 +62,7 @@ public class Test extends JFrame {	private static final long serialVersionUID = 
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-			Test t = new Test();
+			FunctionWindow t = new FunctionWindow();
 			t.setVisible(true);
 		});
 	}
