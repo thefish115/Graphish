@@ -1,15 +1,17 @@
-package drawing;
+package objects;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 
+import drawing.Clip;
+import drawing.PointR2;
+import drawing.Streamable;
 import streams.R1Stream;
 import window.FunctionPanel;
 
-public class FunctionR2X implements Function<PointR2, Clip>, Drawable {
+public class FunctionR2X implements Function<PointR2, Clip>, Streamable {
 	
 	private FunctionPanel pnl;
 	private DoubleUnaryOperator f;
@@ -21,21 +23,12 @@ public class FunctionR2X implements Function<PointR2, Clip>, Drawable {
 		this.color = c;
 	}
 	
-	public void draw(Graphics g) {
+	@Override
+	public Stream<Clip> stream() {
 		
-		g.setColor(color);
-		UnaryOperator<PointR2> dST = pnl.deviceSpaceTransform();
-		
-		R1Stream.xStream(pnl.clip, pnl.getResolution())
+		return R1Stream.xStream(pnl.clip, pnl.getResolution())
 			.map(this::apply)
-			.map(c ->
-				new Clip(
-					dST.apply(c.min),
-					dST.apply(c.max)
-					)
-				)
-			.limit(pnl.getResolution() + 1)
-			.forEach(f -> g.drawLine((int)(f.min.x), (int)(f.min.y), (int)(f.max.x), (int)(f.max.y)));
+			.limit(pnl.getResolution() + 1);
 	}
 
 	@Override
@@ -48,7 +41,11 @@ public class FunctionR2X implements Function<PointR2, Clip>, Drawable {
 			new PointR2(
 				p.y,
 				f.applyAsDouble(p.y)
-				)
+				),
+			this.color
 			);
+	}
+	public Color getColor() {
+		return color;
 	}
 }
