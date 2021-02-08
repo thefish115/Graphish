@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import drawing.Streamable;
+//import functions.CosineSpline;
+import functions.CubicSpline;
+import functions.LinearSpline;
 import objects.FunctionR2X;
 import objects.Xaxis;
 import objects.Yaxis;
 import drawing.Clip;
+import drawing.PointR2;
 
 public class DrawList extends ArrayList<Streamable> {	private static final long serialVersionUID = 441869252152408099L;
 
@@ -19,8 +23,49 @@ public class DrawList extends ArrayList<Streamable> {	private static final long 
 		add(new Yaxis(pnl));
 		add(new Xaxis(pnl));
 	//	Add the things you want to draw here
-		add(new FunctionR2X(pnl, d -> Math.sin(d) + 0, Color.BLACK));
-		add(new FunctionR2X(pnl, d -> Math.sin(d) + 1, Color.BLACK));
+//		add(new FunctionR2X(pnl, d -> Math.sin(d) + 0, Color.BLACK));
+//		add(new FunctionR2X(pnl,
+//				new CosineSpline(new PointR2[] {
+//					new PointR2(-2*Math.PI, 1),
+//					new PointR2(-6, .5),
+//					new PointR2(-4, -1),
+//					new PointR2(-2, 1),
+//					new PointR2(0, -.5),
+//					new PointR2(2, .25),
+//					new PointR2(4, -1.1),
+//					new PointR2(6, 1),
+//					new PointR2(2*Math.PI, 0)
+//				}),
+//				Color.BLACK
+//				));
+		add(new FunctionR2X(pnl,
+				new CubicSpline(new PointR2[] {
+					new PointR2(-2*Math.PI, 1),
+					new PointR2(-6, .5),
+					new PointR2(-4, -1),
+					new PointR2(-2, 1),
+					new PointR2(0, -.5),
+					new PointR2(2, .25),
+					new PointR2(4, -1.1),
+					new PointR2(6, 1),
+					new PointR2(2*Math.PI, 0)
+				}),
+				Color.BLACK
+				));
+		add(new FunctionR2X(pnl,
+				new LinearSpline(new PointR2[] {
+					new PointR2(-2*Math.PI, 1),
+					new PointR2(-6, .5),
+					new PointR2(-4, -1),
+					new PointR2(-2, 1),
+					new PointR2(0, -.5),
+					new PointR2(2, .25),
+					new PointR2(4, -1.1),
+					new PointR2(6, 1),
+					new PointR2(2*Math.PI, 0)
+				}),
+				Color.BLACK
+				));
 		
 		
 		

@@ -22,4 +22,13 @@ public class Clip {
 		g.setColor(color);
 		g.drawLine((int)(min.x), (int)(min.y), (int)(max.x), (int)(max.y));
 	}
+	
+	public boolean containsX(double x) {
+		if(min.x < max.x) {
+			return (x > min.x && x < max.x) ? true : false;
+		} else if(max.x < min.x) {
+			return (x < min.x && x > max.x) ? true : false;
+		}
+		return false;
+	}
 }
